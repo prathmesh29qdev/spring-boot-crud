@@ -1,0 +1,20 @@
+@media only screen and (max-width: 910px) {
+    body {
+      background-color: lightblue;
+    }
+    .different-width {
+        overflow-x: auto;
+    }
+}
+
+table {
+    height: 247px;
+    
+}
+
+.bindInput {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100px;
+  white-space: nowrap;
+}

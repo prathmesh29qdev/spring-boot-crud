@@ -1,0 +1,23 @@
+<div class="different-width">
+  <nav style="margin-bottom: 20px;" class="navbar navbar-expand-sm">
+    <ul class="navbar-nav" style="max-width: fit-content;margin-left: auto;margin-right: auto;">
+      <li class="nav-item">
+        <a routerLink="employees" class="nav-link" style="font-family: Oswald;margin-right: 16pc;">
+          <h6>Employee List</h6>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="addemployees" routerLinkActive="active" class="nav-link" style="font-family: Oswald;">
+          <h6>Add Employee</h6>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div style="width: 70%; margin-left: 15%;margin-right: 15%;margin-top: 0%;">
+    <div class="card">
+      <div class="card-body" style="margin-left: 0px;margin-left: 0%;background-color: white; margin-right: 0%;">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

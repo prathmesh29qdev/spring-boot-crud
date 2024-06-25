@@ -1,0 +1,103 @@
+<div class="formDiv">
+    <div style="display: flex;">
+        <h1 class="text-center" *ngIf="!employee.id"
+            style="max-width: fit-content;margin-left: auto;margin-right: auto;font-size: 33px;font-family: Oswald;">
+            Employee Registration </h1><br>
+        <h1 class="text-center" *ngIf="employee.id"
+            style="max-width: fit-content;margin-left: auto;margin-right: auto;font-size: 33px;font-family: Oswald;">
+            Update Record </h1>
+    </div>
+    <div class="col-md-6 offset-md-3">
+        <form (ngSubmit)="saveEmployee()" style="padding: 0px;font-family: Lora;">
+            <div class="form-group">
+                <label style="color: red;float: left;margin-bottom: -23px;margin-left: -12px">*</label>
+                <input type="text" id="firstName" [(ngModel)]="employee.firstName" [ngModelOptions]="{standalone: true}"
+                    placeholder="First Name" value="${employee.firstName}" name="firstName"
+                    (keyup)="validateName('firstName');" (keypress)="validCheckAlphabets($event)"
+                    maxlength="20" autocomplete="off">
+                <span style="color: red;">{{errorFirstNameMessage}}</span>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label style="color: red;float: left;margin-bottom: -23px;margin-left: -12px">*</label>
+                <input type="text" id="lastName" [(ngModel)]="employee.lastName" name="lastName" [ngModelOptions]="{standalone: true}"
+                    placeholder="Last Name" (keyup)="validateName('lastName')" maxlength="20"
+                    (keypress)="validCheckAlphabets($event)" autocomplete="off">
+                <span style="color: red;">{{errorLastNameMessage}}</span>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label style="color: red;float: left;margin-bottom: -23px;margin-left: -12px">*</label>
+                <input type="date" id="dateOfBirth" [max]="today" [min]="dateLimit" [ngModelOptions]="{standalone: true}"
+                    placeholder="Date of Birth" [(ngModel)]="employee.dateOfBirth" name="emailId" (keypress)="validateData($event)"
+                    (change)="validateName('dateOfBirth')" autocomplete="off">
+            </div>
+            <div class="form-group" style="margin-top: 12px;">
+                <div style="display: flex;width: 120%;">
+                    <label style="color: red;float: left;margin-bottom: -23px;margin-left: -8px;margin-top: 22px;">*</label>
+                    <input type="text" id="address1" [(ngModel)]="employee.address1" [ngModelOptions]="{standalone: true}"
+                        name="address1" placeholder="Address 1" (keyup)="validateName('address1')"
+                        (input)="validateName('address1')" maxlength="150" style="width: 83.3%;margin-right: 10px;margin-top: 23px;"
+                        autocomplete="off">
+                    <span style="margin-top: 26px;color: green;" *ngIf="employee.address1">{{remainingLength}}/150</span>
+                </div>
+                <span style="color: red;">{{errorAdressMessage}}</span>
+            </div>
+            <div class="form-group" style="margin-top: -20px;">
+                <div style="display: flex;width: 120%;">
+                    <input type="text" id="address2" [(ngModel)]="employee.address2" [ngModelOptions]="{standalone: true}"
+                        name="address2" placeholder="Address 2" (keyup)="enableSubmit()"
+                        (input)="validateName('address2')" maxlength="150" style="width: 83.3%;margin-right: 7px;margin-top: 58px;margin-right: -6px;"
+                        autocomplete="off">
+                    <span style="margin-top: 58px;color: green;margin-left: 15px;"
+                        *ngIf="employee.address2">{{remainingLength2}}/150</span>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: -3px;">
+                <label style="color: red;float: left;margin-bottom: -23px;margin-left: -12px">*</label>
+                <input type="text" id="age" [(ngModel)]="employee.age" name="age" placeholder="Age" [ngModelOptions]="{standalone: true}"
+                    (keyup)="validateName('age')" (keypress)="validCheckNumbers($event)" maxlength="3"
+                    autocomplete="off">
+                <span style="color: red;">{{errorAgeMessage}}</span>
+            </div>
+            <div class="form-group" style="margin-top: 29px;margin-bottom: -32px;">
+                <label style="margin-left: -13px;"> <label style="color: red;">*</label> Gender</label><br>
+                <mat-radio-group [(ngModel)]="employee.gender" [ngModelOptions]="{standalone: true}">
+                    <mat-radio-button value="1" [checked]="checkTheBox == true"
+                        (change)="handleChange($event)">Male</mat-radio-button>
+                    <mat-radio-button value="0" [checked]="checkTheBox == false"
+                        (change)="handleChange($event)">Female</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <div style="display: flex;">
+                    <div style="position: relative; display: inline-block;">
+                        <label style="color: red;float: left;margin-bottom: -23px;margin-left: -12px;margin-top: 43px;">*</label>
+                        <label *ngIf="!mobilePrefix.id" for="countryCode" style="font-family: Lora;position: absolute; top: 74%; right: 10px; transform: translateY(-50%);font-family: Poppins;color: rgb(123, 123, 123);margin-bottom: 10px;">
+                            Please Select</label>
+                        <select id="countryCode" class="form-control" name="countryCode" style="margin-right: 6px;width: auto; border-radius: 0px;" [(ngModel)]="mobilePrefix.id" [ngModelOptions]="{standalone: true}"
+                        (change)="enableSubmit();getMobilePrefixById()">
+                            <option *ngFor="let prefix of mobilePrefixes" value="{{prefix.id}}">{{prefix.countryCode}}
+                                {{prefix.countryName}}</option>
+                        </select>
+                    </div>
+                    <input type="text" id="mobile" maxlength="10" [(ngModel)]="employee.mobile" [ngModelOptions]="{standalone: true}"
+                        placeholder="Mobile Number" name="mobile" (keyup)="validateName('mobile')"
+                        (input)="validateName('mobile')" (keypress)="validCheckNumbers($event)"
+                        autocomplete="off">
+                </div>
+                <span style="color: red;">{{errorMobileMessage}}</span>
+            </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label style="color: red;float: left;margin-bottom: -23px;margin-left: -12px">*</label>
+                <input type="text" id="email" [(ngModel)]="employee.email" name="email" [ngModelOptions]="{standalone: true}"
+                    placeholder="Email Id" (keyup)="validateName('email')" (input)="validateName('email')" maxlength="30"
+                    autocomplete="off">
+                <span style="color: red;">{{errorEmailMessage}}</span>
+            </div>
+            <button *ngIf="canSubmit" class="btn btn-success" type="submit"
+                style="margin-top: 10px;margin-left: 43%;background-color: hsl(180deg 100% 96.28%);color: black;"
+                [disabled]="!canSubmit">Submit</button>
+            <div style="height: 24px;" *ngIf="!canSubmit"></div>
+            <span style="color: red;max-width: fit-content;margin-left: 32%;margin-right: auto;">{{submitError}}</span>
+        </form>
+    </div>
+</div>

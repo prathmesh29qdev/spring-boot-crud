@@ -1,0 +1,31 @@
+label {
+    margin-bottom: 1px;
+}
+
+.formDiv {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    overflow-y: hidden;
+
+}
+
+@media only screen and (max-width: 600px) {
+    form {
+        max-height: fit-content;
+        max-width: fit-content;
+    }
+}
+
+input,
+select {
+    width: 100%;
+    display: block;
+    border: none;
+    margin-top: 40px;
+    border-bottom: 1px solid;
+    font-family: Poppins;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+}

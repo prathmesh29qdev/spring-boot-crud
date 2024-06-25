@@ -1,0 +1,56 @@
+.different-width {
+    background-image: linear-gradient(hsl(180deg 100% 96.28%), hsl(180deg 100% 96.28%));
+    background-size:contain;
+}
+
+/* @media only screen and (min-width: 550px) {
+    .different-width {
+        height: 100%;
+        background-size:100%;
+        background-size:contain;
+    }
+} */
+
+@media only screen and (max-width: 550px) {
+    .different-width {
+        background-size:contain;
+        width: auto;
+    }
+}   
+
+@media only screen and (min-width: 1000px) {
+    .different-width {
+        height: 150%;
+        width: auto;
+        background-size:contain;
+    }
+}
+
+@media only screen and (width: 853px) {
+    .different-width {
+        height: 100%;
+        width: auto;
+        background-size:contain;
+    }
+}
+
+@media only screen and (width: 344px) and (height: 882px) {
+    .different-width {
+        height: 140%;
+        width: 105%;
+        
+    }
+}
+
+@media only screen and (max-width: 999px) and (min-width: 550px) {
+    .different-width {
+        height: 130%;
+        width: auto;
+    }
+}
+
+@media only screen and (orientation: landscape) {
+    .different-width {
+        height: 250%;
+    }
+}
